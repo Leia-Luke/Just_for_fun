@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デートの日まで....</title>
+<style>
+  body {
+    background-color: #F5E9DE; /* 淡い桃色 */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  h1 {
+    color: #3E2723; /* ダークブラウン色 */
+    text-align: center;
+  }
+  #countdown {
+    font-size: 2rem;
+    color: #3E2723; /* ダークブラウン色 */
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>デートの日まで....</h1>
+<div id="countdown"></div>
+
+<script>
+  // ターゲット日時の設定
+  const targetDate = new Date("2024-02-01T18:00:00").getTime();
+
+  // カウントダウンを更新する関数
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    // カウントダウンが終了した場合
+    if (distance < 0) {
+      document.getElementById("countdown").innerHTML = "今、あなたと会えます！";
+    } else {
+      // 日、時、分、秒の計算
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // カウントダウンの表示
+      document.getElementById("countdown").innerHTML = `${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
+    }
+  }
+
+  // 初回の実行と1秒ごとの更新
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
